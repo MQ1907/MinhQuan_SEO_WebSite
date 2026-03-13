@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Link from "next/link";
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
 export const metadata: Metadata = {
   title: {
     template: "%s | Tiệm Hoa Vũng Tàu",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     },
     description:
       "Tiệm Hoa Tươi Vũng Tàu chuyên thiết kế hoa sinh nhật, khai trương, Valentine sang trọng. Cam kết hoa tươi mới mỗi ngày, giá tốt, giao nhanh hỏa tốc 2h tận nơi tại Vũng Tàu.",
-    url: "https://tiemhoavungtau.com",
+    url: `${baseUrl}`,
     siteName: "Tiệm Hoa Vũng Tàu",
     images: [
       {
@@ -34,9 +35,9 @@ export const metadata: Metadata = {
     countryName: "Việt Nam",
   },
   alternates: {
-    canonical: "https://tiemhoavungtau.com/",
+    canonical: `${baseUrl}`,
   },
-  metadataBase: new URL("https://tiemhoavungtau.com"),
+  metadataBase: new URL(`${baseUrl}`),
 };
 
 export const viewport: Viewport = {
