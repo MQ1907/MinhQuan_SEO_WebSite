@@ -27,6 +27,11 @@ export const getCategories = async (): Promise<Category[]> => {
   return db.categories;
 };
 
+export const getProducts = async (): Promise<Category[]> => {
+  const db = getDb();
+  return db.products;
+};
+
 export const getCategoryById = async (id: string): Promise<Category | undefined> => {
   const db = getDb();
   return db.categories.find((cat: Category) => cat.id === id);
