@@ -1,10 +1,62 @@
 import { getProductById } from "@/lib/db";
 
 import { notFound } from "next/navigation";
+import { cache } from "react";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+// SEO
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+const getProducts = cache(getProductById);
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const product = await getProducts(id);
+
+  if (!product) {
+    return {};
+  }
+
+  const keywordTags = product.tags.map((tag) => tag.toLowerCase());
+
+  return {
+    title: product.name,
+    description: `${product.name} được thiết kế bởi thợ cắm hoa chuyên nghiệp tại Tiệm Hoa Vũng Tàu. Cam kết hoa tươi mới mỗi ngày, giá tốt, giao nhanh hỏa tốc 2h tận nơi tại Vũng Tàu.`,
+    keywords: [
+      "hoa tươi Vũng Tàu",
+      "shop hoa Vũng Tàu",
+      "đặt hoa online",
+      product.name.toLowerCase(),
+      `${product.name.toLowerCase()} Vũng Tàu`,
+      ...keywordTags,
+    ],
+
+    openGraph: {
+      title: product.name,
+      description: `${product.name} được thiết kế bởi thợ cắm hoa chuyên nghiệp tại Tiệm Hoa Vũng Tàu. Cam kết hoa tươi mới mỗi ngày, giá tốt, giao nhanh hỏa tốc 2h tận nơi tại Vũng Tàu.`,
+      url: `${baseUrl}/products/${product.id}`,
+      siteName: "Tiệm Hoa Vũng Tàu",
+      images: [
+        {
+          url: "/hoa.jpg",
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+      locale: "vi_VN",
+      phoneNumbers: "098789456",
+      type: "website",
+      emails: "tiemhoavungtau@gmail.com",
+      countryName: "Việt Nam",
+    },
+
+    alternates: {
+      canonical: `${baseUrl}/products/${product.id}`,
+    },
+  };
+}
 
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
@@ -12,7 +64,7 @@ export default async function ProductDetailPage({ params }: Props) {
   if (!id) {
     return notFound();
   }
-  const product = await getProductById(id);
+  const product = await getProducts(id);
 
   if (!product) {
     return notFound();
