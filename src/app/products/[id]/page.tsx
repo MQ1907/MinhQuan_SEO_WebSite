@@ -1,3 +1,4 @@
+import ProductSchema from "@/component/ProductSchema";
 import { getProductById } from "@/lib/db";
 
 import { notFound } from "next/navigation";
@@ -72,6 +73,12 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <main className="category-container">
+      <ProductSchema
+        name={product.name}
+        productId={product.id}
+        description={product.name}
+        price={product.price}
+      />
       <div className="flex flex-col md:flex-row gap-10 mt-8">
         {/* Giả lập ảnh sản phẩm */}
         <div className="w-full md:w-1/2 aspect-square bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400">
