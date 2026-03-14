@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(`${baseUrl}`),
   verification: {
-    google: "google372d4271ae4c4936.html",
+    google: "372d4271ae4c4936", // khai báo cho google search console
   },
 };
 
