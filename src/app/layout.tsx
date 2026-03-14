@@ -39,9 +39,6 @@ export const metadata: Metadata = {
     canonical: `${baseUrl}`,
   },
   metadataBase: new URL(`${baseUrl}`),
-  verification: {
-    google: "372d4271ae4c4936", // khai báo cho google search console
-  },
 };
 
 export const viewport: Viewport = {
