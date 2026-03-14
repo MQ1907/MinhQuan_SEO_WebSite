@@ -1,10 +1,8 @@
 import ProductCard from "@/component/ProductCard";
 import { searchProducts } from "@/lib/db";
-import { cache } from "react";
 
 // SEO
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-const getProducts = cache(searchProducts);
 
 export async function generateMetadata({
   searchParams,
@@ -24,7 +22,7 @@ export async function generateMetadata({
     };
   }
 
-  const products = await getProducts(q);
+  const products = await searchProducts(q);
   const topProducts = products.slice(0, 10).map((p) => p.name.toLowerCase());
 
   return {
@@ -77,7 +75,7 @@ export default async function SearchPage({
   searchParams: Promise<{ q: string }>;
 }) {
   const { q } = await searchParams;
-  const products = await getProducts(q);
+  const products = await searchProducts(q);
 
   return (
     <main className="category-container">

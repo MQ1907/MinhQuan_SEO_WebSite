@@ -12,7 +12,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="p-8">
+    <main className="p-8 category-container">
       <h1>Chào mừng đến với Tiệm Hoa Vũng Tàu</h1>
       <p>Địa chỉ cung cấp hoa tươi chất lượng cao tại thành phố biển.</p>
 

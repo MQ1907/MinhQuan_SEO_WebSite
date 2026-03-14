@@ -1,19 +1,25 @@
 import ProductCard from "@/component/ProductCard";
 import { formatVietnameseDate } from "@/lib";
-import { getProductsByCategory } from "@/lib/db";
-import { cache } from "react";
+import { getCategoryById, getProductsByCategory } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 // SEO
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-const getProducts = cache(getProductsByCategory);
+
 export async function generateMetadata({ params }: PageProps<"/[category]">) {
-  const { category } = await params;
-  const categoryName = category.replace(/-/g, " ");
-  const products = await getProducts(category);
+  const { category: categoryId } = await params;
+  const category = await getCategoryById(categoryId);
+
+  if (!category) {
+    return notFound();
+  }
+
+  const categoryName = category.name.toLowerCase();
+  const products = await getProductsByCategory(categoryId);
   const topProducts = products.splice(0, 10).map((p) => p.name.toLowerCase());
 
   return {
-    title: `Mẫu ${categoryName} đẹp nhất ${formatVietnameseDate(new Date())}`,
+    title: `Mẫu ${categoryName} đẹp nhất trong ${formatVietnameseDate(new Date())}`,
     description: `Khám phá bộ sưu tập ${categoryName} thiết kế độc đáo tại Vũng Tàu. Cam kết hoa tươi trong ngày, giá cả cạnh tranh. Free ship nội thành.`,
     keywords: [
       "hoa tươi Vũng Tàu",
@@ -27,7 +33,7 @@ export async function generateMetadata({ params }: PageProps<"/[category]">) {
     openGraph: {
       title: `Mẫu ${categoryName} đẹp nhất ${formatVietnameseDate(new Date())}`,
       description: `Khám phá bộ sưu tập ${categoryName} thiết kế độc đáo tại Vũng Tàu. Cam kết hoa tươi trong ngày, giá cả cạnh tranh. Free ship nội thành.`,
-      url: "https://tiemhoavungtau.com",
+      url: `${baseUrl}/${categoryId}`,
       siteName: "Tiệm Hoa Vũng Tàu",
       images: [
         {
@@ -44,20 +50,27 @@ export async function generateMetadata({ params }: PageProps<"/[category]">) {
       countryName: "Việt Nam",
     },
     alternates: {
-      canonical: `${baseUrl}/${category}`,
+      canonical: `${baseUrl}/${categoryId}`,
     },
   };
 }
 
 export default async function CategoryPage({ params }: PageProps<"/[category]">) {
-  const { category } = await params;
-  const products = await getProducts(category);
+  const { category: categoryId } = await params;
+  const category = await getCategoryById(categoryId);
+
+  if (!category) {
+    return notFound();
+  }
+
+  const categoryName = category.name.toLowerCase();
+  const products = await getProductsByCategory(categoryId);
 
   return (
     <main className="category-container">
-      <h1 className="category-title">Danh mục: {category.replace(/-/g, " ")}</h1>
+      <h1 className="category-title">Danh mục: {categoryName}</h1>
       <p className="category-description">
-        Hiển thị các mẫu hoa thuộc nhóm {category.replace(/-/g, " ")}...
+        Hiển thị các mẫu hoa thuộc nhóm {categoryName}...
       </p>
 
       {products && products.length > 0 ? (
