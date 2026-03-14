@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/[category]">) {
       ...topProducts,
     ],
     openGraph: {
-      title: `Mẫu ${categoryName} đẹp nhất ngày ${formatVietnameseDate(new Date())}`,
+      title: `Mẫu ${categoryName} đẹp nhất ${formatVietnameseDate(new Date())}`,
       description: `Khám phá bộ sưu tập ${categoryName} thiết kế độc đáo tại Vũng Tàu. Cam kết hoa tươi trong ngày, giá cả cạnh tranh. Free ship nội thành.`,
       url: "https://tiemhoavungtau.com",
       siteName: "Tiệm Hoa Vũng Tàu",

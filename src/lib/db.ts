@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { cache } from "react";
 
 export interface Category {
   id: string;
@@ -22,36 +23,38 @@ const getDb = () => {
   return JSON.parse(jsonData);
 };
 
-export const getCategories = async (): Promise<Category[]> => {
+export const getCategories = cache(async (): Promise<Category[]> => {
   const db = getDb();
   return db.categories;
-};
+});
 
-export const getProducts = async (): Promise<Category[]> => {
+export const getProducts = cache(async (): Promise<Category[]> => {
   const db = getDb();
   return db.products;
-};
+});
 
-export const getCategoryById = async (id: string): Promise<Category | undefined> => {
-  const db = getDb();
-  return db.categories.find((cat: Category) => cat.id === id);
-};
+export const getCategoryById = cache(
+  async (id: string): Promise<Category | undefined> => {
+    const db = getDb();
+    return db.categories.find((cat: Category) => cat.id === id);
+  },
+);
 
-export const getProductsByCategory = async (
-  category: string,
-): Promise<Product[]> => {
-  const db = getDb();
-  return db.products.filter(
-    (prod: Product) => prod.category.toLowerCase() === category.toLowerCase(),
-  );
-};
+export const getProductsByCategory = cache(
+  async (category: string): Promise<Product[]> => {
+    const db = getDb();
+    return db.products.filter(
+      (prod: Product) => prod.category.toLowerCase() === category.toLowerCase(),
+    );
+  },
+);
 
-export const getProductById = async (id: string): Promise<Product> => {
+export const getProductById = cache(async (id: string): Promise<Product> => {
   const db = getDb();
   return db.products.find((prod: Product) => prod.id.toString() === id);
-};
+});
 
-export const searchProducts = async (query: string): Promise<Product[]> => {
+export const searchProducts = cache(async (query: string): Promise<Product[]> => {
   const db = getDb();
   const lowerQuery = query.toLowerCase();
   return db.products.filter(
@@ -59,4 +62,4 @@ export const searchProducts = async (query: string): Promise<Product[]> => {
       prod.name.toLowerCase().includes(lowerQuery) ||
       prod.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
   );
-};
+});
