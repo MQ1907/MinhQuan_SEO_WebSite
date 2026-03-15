@@ -1,6 +1,13 @@
 ## Bắt đầu
 
-Đầu tiên, hãy khởi chạy server:
+Đầu tiên, cài đặt dependencies:
+```bash
+npm install
+# or
+pnpm install
+```
+
+Sau đó, khởi chạy server:
 
 ```bash
 npm run dev
