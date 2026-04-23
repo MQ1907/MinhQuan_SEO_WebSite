@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Chuyên thiết kế hoa sinh nhật, khai trương, Valentine sang trọng. Cam kết hoa tươi mới mỗi ngày, giá tốt, giao nhanh hỏa tốc 2h tận nơi tại Vũng Tàu.",
   keywords: ["hoa tươi Vũng Tàu", "shop hoa Vũng Tàu", "đặt hoa online"],
   verification: {
-    google: "google583176a02113f398",
+    google: "BFs__6YHwAzLSDCg1m0J6ngPlR9k8V5Bo04dbewxWpw",
   },
   openGraph: {
     title: {
@@ -63,36 +63,21 @@ export default function RootLayout({
       <body>
         <nav className="nav-bar">
           <div className="nav-content">
-            <Link
-              href="/"
-              className="nav-logo"
-            >
+            <Link href="/" className="nav-logo">
               🌸 Tiệm Hoa Vũng Tàu
             </Link>
 
             <div className="nav-links">
-              <Link
-                href="/hoa-sinh-nhat"
-                className="nav-link-item"
-              >
+              <Link href="/hoa-sinh-nhat" className="nav-link-item">
                 Hoa sinh nhật
               </Link>
-              <Link
-                href="/hoa-8-3"
-                className="nav-link-item"
-              >
+              <Link href="/hoa-8-3" className="nav-link-item">
                 Hoa 8/3
               </Link>
-              <Link
-                href="/hoa-tiec"
-                className="nav-link-item"
-              >
+              <Link href="/hoa-tiec" className="nav-link-item">
                 Hoa tiệc
               </Link>
-              <Link
-                href="/hoa-valentine"
-                className="nav-link-item"
-              >
+              <Link href="/hoa-valentine" className="nav-link-item">
                 Hoa Valentine
               </Link>
             </div>
