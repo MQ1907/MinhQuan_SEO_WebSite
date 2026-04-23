@@ -3,8 +3,5 @@
   "devCommand": "next dev",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "outputDirectory": ".next",
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "@nextjs_seo_app_url"
-  }
+  "outputDirectory": ".next"
 }
