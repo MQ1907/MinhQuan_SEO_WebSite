@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description:
     "Chuyên thiết kế hoa sinh nhật, khai trương, Valentine sang trọng. Cam kết hoa tươi mới mỗi ngày, giá tốt, giao nhanh hỏa tốc 2h tận nơi tại Vũng Tàu.",
   keywords: ["hoa tươi Vũng Tàu", "shop hoa Vũng Tàu", "đặt hoa online"],
+  verification: {
+    google: "google583176a02113f398",
+  },
   openGraph: {
     title: {
       template: "%s | Tiệm Hoa Vũng Tàu",
