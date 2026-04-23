@@ -2,7 +2,7 @@ import ProductCard from "@/component/ProductCard";
 import { searchProducts } from "@/lib/db";
 
 // SEO
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tiemhoavungtau.com";
 
 export async function generateMetadata({
   searchParams,
@@ -87,15 +87,13 @@ export default async function SearchPage({
       {products && products.length > 0 ? (
         <ul className="product-list">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </ul>
       ) : (
         <p className="empty-message">
-          Rất tiếc, chúng tôi không tìm thấy sản phẩm nào phù hợp với từ khóa &quot;
+          Rất tiếc, chúng tôi không tìm thấy sản phẩm nào phù hợp với từ khóa
+          &quot;
           {q}&quot;.
         </p>
       )}

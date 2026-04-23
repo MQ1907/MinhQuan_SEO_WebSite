@@ -2,8 +2,10 @@ import ProductSchema from "@/component/ProductSchema";
 import { getProductById } from "@/lib/db";
 import { notFound } from "next/navigation";
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-export async function generateMetadata({ params }: PageProps<"/products/[id]">) {
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tiemhoavungtau.com";
+export async function generateMetadata({
+  params,
+}: PageProps<"/products/[id]">) {
   const { id } = await params;
   const product = await getProductById(id);
 
@@ -81,7 +83,9 @@ export default async function ProductDetailPage({
         </div>
 
         <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">{product.name}</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            {product.name}
+          </h1>
           <p className="text-2xl font-bold text-blue-600 mb-6">
             {product.price.toLocaleString("vi-VN")}đ
           </p>
@@ -89,9 +93,9 @@ export default async function ProductDetailPage({
           <div className="border-t border-b border-gray-100 py-6 mb-6">
             <h3 className="font-semibold mb-2">Thông tin sản phẩm:</h3>
             <p className="text-gray-600 leading-relaxed">
-              Mẫu hoa được thiết kế tỉ mỉ bởi các thợ cắm hoa lành nghề tại Vũng Tàu.
-              Sử dụng các loại hoa tươi mới nhất trong ngày, đảm bảo độ bền và hương
-              thơm.
+              Mẫu hoa được thiết kế tỉ mỉ bởi các thợ cắm hoa lành nghề tại Vũng
+              Tàu. Sử dụng các loại hoa tươi mới nhất trong ngày, đảm bảo độ bền
+              và hương thơm.
             </p>
           </div>
 

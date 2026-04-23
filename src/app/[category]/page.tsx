@@ -4,7 +4,7 @@ import { getCategoryById, getProductsByCategory } from "@/lib/db";
 import { notFound } from "next/navigation";
 
 // SEO
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tiemhoavungtau.com";
 
 export async function generateMetadata({ params }: PageProps<"/[category]">) {
   const { category: categoryId } = await params;

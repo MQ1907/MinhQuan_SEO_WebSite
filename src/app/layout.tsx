@@ -3,7 +3,7 @@ import "./globals.css";
 import Link from "next/link";
 import BusinessSchema from "@/component/BusinessSchema";
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tiemhoavungtau.com";
 export const metadata: Metadata = {
   title: {
     template: "%s | Tiệm Hoa Vũng Tàu",
